@@ -22,9 +22,13 @@ double readConsoleDouble(String text) {
   }
 }
 
-void imc(double peso, double altura) {
-  double imcValue = peso / (altura * altura);
-  print(imcValue.ceil());
+double imc(double peso, double altura) {
+  if (peso <= 0 || altura <= 0) {
+    throw ArgumentError("Valor não pode ser menor ou igual a zero");
+  }
+
+  double imc = peso / (altura * altura);
+  double imcValue = double.parse(imc.toStringAsFixed(1));
   if (imcValue < 16.0) {
     showConoleAndReturnDouble("Magreza Grave / IMC: $imcValue", imcValue);
   } else if (imcValue == 16 || imcValue < 17) {
@@ -42,4 +46,6 @@ void imc(double peso, double altura) {
   } else if (imcValue >= 40) {
     showConoleAndReturnDouble("Obresidade Grau 3 / IMC: $imcValue", imcValue);
   }
+
+  return imcValue;
 }
